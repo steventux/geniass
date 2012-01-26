@@ -1,0 +1,52 @@
+#main {
+  font-family:sans-serif;
+}
+#title {
+  color:#999;
+  font-size:1.5em;
+}
+#nav {
+  display:block;
+  height:100px;
+  list-style-type:none;
+}
+#nav li { 
+  display:inline-block;
+  margin:0 20px 0 20px;
+}
+#nav li a {
+  color:#666;
+  text-decoration:none;
+  cursor:pointer;
+}
+#nav li a:active {
+  color:#eee;
+  text-decoration:none;
+  cursor:none;
+}
+#genius, #asshole {
+  display:none;
+  position:absolute;
+  height:500px;
+  width:500px;
+  border-radius:250px;
+  -moz-border-radius:250px;
+  -webkit-border-radius:250px;
+  line-height:30;
+  text-align:center;
+}
+#genius div, #asshole div {
+  display:block;
+  position:relative;
+}
+#genius {
+  top:150px;
+  left:50px;
+  background:rgba(34,139,34,0.5);
+}
+#asshole {
+  top:150px;
+  left:350px;
+  background:rgba(255,0,0,0.5);
+}
+
