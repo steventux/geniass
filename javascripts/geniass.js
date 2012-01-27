@@ -45,26 +45,6 @@ var app = $.sammy('#main', function() {
     });
   });
   
-  this.get('#/mustache', function() {
-    
-    var context = this,
-        template = 'templates/main.mustache';
-    
-    $.get('templates/nav_items.mustache', function(response){
-      context.partials = { nav_items : response };
-      context.title = "Geniass";
-      context.nav_items = [
-        { route : "geniuses", label : "Genius" }, 
-        { label : '+'},
-        { route : "assholes", label : "Asshole" },
-        { label : '='},
-        { route : "geniasses", label : "Geniass" }
-      ];
-      context.partial(template);
-    });
-    
-  });
-
 });
 
 $(function() {
