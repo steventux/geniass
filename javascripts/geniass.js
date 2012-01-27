@@ -1,16 +1,19 @@
-var domCallbacks = {
-  fadeIn : function(){ domCallbacks.applyEffect('fadeIn') },
-  fadeOut : function(){ domCallbacks.applyEffect('fadeOut') },
-  applyEffect : function(effect) { 
-    $("#genius, #asshole").each(function(idx) {
-      $(this)[effect]();
-    }); 
-  }
-}
-
 var app = $.sammy('#main', function() {
 
   this.use('Mustache');
+  
+  // Override swap to fadeIn and fadeOut
+  this.swap = function(content, callback) {
+     var context = this;
+     context.$element().fadeOut('medium', function() {
+       context.$element().html(content);
+       context.$element().fadeIn('medium', function() {
+         if (callback) {
+           callback.apply();
+         }
+       });
+     });
+   };
 
   this.get('#/', function() {
     this.title = "Geniass";
@@ -25,7 +28,7 @@ var app = $.sammy('#main', function() {
       context.partials = { diagram : response };
       context.title = "Geniass";
       context.venn_bubbles = [{ element_id : "genius", label : "Rich Hickey" }];
-      context.partial(template, context, domCallbacks.fadeIn);
+      context.partial(template);
     });
     
   });
@@ -38,7 +41,7 @@ var app = $.sammy('#main', function() {
       context.partials = { diagram : response };
       context.title = "Geniass";
       context.venn_bubbles = [{ element_id : "asshole", label : "Rich Hickey" }];
-      context.partial(template, context, domCallbacks.fadeIn);
+      context.partial(template);
     });
   });
   
@@ -50,7 +53,7 @@ var app = $.sammy('#main', function() {
       context.partials = { diagram : response };
       context.title = "Geniass";
       context.venn_bubbles = [{ element_id : "genius", label : "Rich Hickey", css_class : "join" }, { element_id : "asshole" }];
-      context.partial(template, context, domCallbacks.fadeIn);
+      context.partial(template);
     });
   });
   
