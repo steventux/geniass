@@ -2,8 +2,6 @@ var app = $.sammy('#main', function() {
 
   this.use('Mustache');
 
-  var GENIASSES = ['Rich Hickey'];
-  
   this.get('#/', function() {
     this.title = "Geniass";
     this.partial('templates/main.mustache');
