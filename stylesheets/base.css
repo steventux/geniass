@@ -43,6 +43,9 @@
   left:50px;
   background:rgba(34,139,34,0.5);
 }
+#genius div.join {
+  left:150px;
+}
 #asshole {
   top:150px;
   left:350px;
