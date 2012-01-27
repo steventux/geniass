@@ -1,33 +1,70 @@
-var app = $.sammy(function() {
+var app = $.sammy('#main', function() {
+
+  this.use('Mustache');
 
   var GENIASSES = ['Rich Hickey'];
   
   this.get('#/', function() {
-    $('#genius').fadeOut();
-    $('#asshole').fadeOut();
+    this.title = "Geniass";
+    this.partial('templates/main.mustache');
   });
   
   this.get('#/geniuses', function() {
-    $('#asshole').fadeOut();
-    $('#genius').fadeIn();
-    $('#genius div').html(GENIASSES.join(" "));
-    $('#genius div').css({'left':'0px'});
+  
+    var context = this,
+        template = 'templates/main.mustache';
+    
+    $.get('templates/diagram.mustache', function(response){
+      context.partials = { diagram : response };
+      context.title = "Geniass";
+      context.venn_bubbles = [{ element_id : "genius", label : "Rich Hickey" }];
+      context.partial(template);
+    });
+    
   });
   
   this.get('#/assholes', function() {
-    $('#genius').fadeOut();
-    $('#asshole').fadeIn();
-    $('#asshole div').html(GENIASSES.join(" "));
-    $('#asshole div').show();
-    $('#asshole div').css({'left':'0px'});
+    var context = this,
+        template = 'templates/main.mustache';
+    
+    $.get('templates/diagram.mustache', function(response){
+      context.partials = { diagram : response };
+      context.title = "Geniass";
+      context.venn_bubbles = [{ element_id : "asshole", label : "Rich Hickey" }];
+      context.partial(template);
+    });
   });
   
   this.get('#/geniasses', function() {
-    $('#genius').fadeIn();
-    $('#asshole').fadeIn();
-    $('#genius div').html(GENIASSES.join(" "));
-    $('#asshole div').hide();
-    $('#genius div').css({'left':'150px'});
+    var context = this,
+        template = 'templates/main.mustache';
+    
+    $.get('templates/diagram.mustache', function(response){
+      context.partials = { diagram : response };
+      context.title = "Geniass";
+      context.venn_bubbles = [{ element_id : "genius", label : "Rich Hickey" }, { element_id : "asshole", label : "Rich Hickey" }];
+      context.partial(template);
+    });
+  });
+  
+  this.get('#/mustache', function() {
+    
+    var context = this,
+        template = 'templates/main.mustache';
+    
+    $.get('templates/nav_items.mustache', function(response){
+      context.partials = { nav_items : response };
+      context.title = "Geniass";
+      context.nav_items = [
+        { route : "geniuses", label : "Genius" }, 
+        { label : '+'},
+        { route : "assholes", label : "Asshole" },
+        { label : '='},
+        { route : "geniasses", label : "Geniass" }
+      ];
+      context.partial(template);
+    });
+    
   });
 
 });
