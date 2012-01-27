@@ -25,6 +25,7 @@
   cursor:none;
 }
 #genius, #asshole {
+  display:none;
   position:absolute;
   height:500px;
   width:500px;
