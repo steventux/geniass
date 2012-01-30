@@ -16,7 +16,6 @@ var app = $.sammy('#main', function() {
    };
 
   this.get('#/', function() {
-    this.title = "Geniass";
     this.partial('templates/main.mustache');
   });
   
@@ -26,7 +25,6 @@ var app = $.sammy('#main', function() {
     
     $.get('templates/diagram.mustache', function(response){
       context.partials = { diagram : response };
-      context.title = "Geniass";
       context.venn_bubbles = [{ element_id : "genius", label : "Rich Hickey" }];
       context.partial(template);
     });
@@ -39,7 +37,6 @@ var app = $.sammy('#main', function() {
     
     $.get('templates/diagram.mustache', function(response){
       context.partials = { diagram : response };
-      context.title = "Geniass";
       context.venn_bubbles = [{ element_id : "asshole", label : "Rich Hickey" }];
       context.partial(template);
     });
@@ -51,8 +48,10 @@ var app = $.sammy('#main', function() {
     
     $.get('templates/diagram.mustache', function(response){
       context.partials = { diagram : response };
-      context.title = "Geniass";
-      context.venn_bubbles = [{ element_id : "genius", label : "Rich Hickey", css_class : "join" }, { element_id : "asshole" }];
+      context.venn_bubbles = [
+        { element_id : "genius", label : "Rich Hickey", css_class : "join" }, 
+        { element_id : "asshole" }
+      ];
       context.partial(template);
     });
   });

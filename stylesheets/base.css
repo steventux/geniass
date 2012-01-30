@@ -51,4 +51,12 @@
   left:350px;
   background:rgba(255,0,0,0.5);
 }
+#form {
+  position:absolute;
+  top:58px;
+  left:520px;
+}
+#form #name { 
+  width:200px;
+}
 
